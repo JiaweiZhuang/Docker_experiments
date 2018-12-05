@@ -1,4 +1,4 @@
-FROM gc_env
+FROM zhuangjw/gc_env
 MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
 
 # build-time arguments, not used in run-time
