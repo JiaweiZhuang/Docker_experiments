@@ -3,8 +3,14 @@ MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
 
 # The default compiler is gfortran4 but GCHP requires gfortran7+
 RUN yum -y update \
-    && yum install -y make wget vim git m4 bzip2 bc numpy-f2py centos-release-scl \
-    && yum install -y devtoolset-7-gcc-gfortran devtoolset-7-gcc-c++ \
+    && yum install -y make wget vim git m4 bzip2 bc numpy-f2py \
+    && yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-runtime-7.1-4.el7.x86_64.rpm \
+    && yum install -y https://buildlogs.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-binutils-2.28-7.el7.x86_64.rpm \
+    && yum install -y https://buildlogs.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-gcc-7.2.1-1.el7.x86_64.rpm \
+    && yum install -y https://buildlogs.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-libquadmath-devel-7.2.1-1.el7.x86_64.rpm \
+    && yum install -y https://buildlogs.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-gcc-gfortran-7.2.1-1.el7.x86_64.rpm \
+    && yum install -y https://buildlogs.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-libstdc++-devel-7.2.1-1.el7.x86_64.rpm \
+    && yum install -y https://buildlogs.centos.org/centos/7/sclo/x86_64/rh/devtoolset-7/devtoolset-7-gcc-c++-7.2.1-1.el7.x86_64.rpm \
     && yum clean all
 
 # Set gcc7 as default compiler to build libraries
