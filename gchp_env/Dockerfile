@@ -7,9 +7,6 @@ RUN yum -y update \
     && yum install -y devtoolset-7-gcc-gfortran devtoolset-7-gcc-c++ \
     && yum clean all
 
-# fix Perl error message
-ENV LANG C
-
 # Set gcc7 as default compiler to build libraries
 ENV PATH=/opt/rh/devtoolset-7/root/usr/bin:$PATH
 ENV CC=gcc CXX=g++ FC=gfortran F77=gfortran F90=gfortran
@@ -73,6 +70,9 @@ RUN wget http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz \
     && make install \
     && rm -rf /tmp/*
 
+# mpicc, mpifort
+ENV PATH=/usr/local/mpich/bin:$PATH
+
 # GEOS-Chem classic environment
 ENV NETCDF_HOME=$NCDIR NETCDF_FORTRAN_HOME=$NFDIR
 ENV GC_BIN=$NETCDF_HOME/bin \
@@ -89,8 +89,10 @@ ENV LD_LIBRARY_PATH=$NFDIR/lib:$LD_LIBRARY_PATH
 ENV OMPI_CC=$CC OMPI_CXX=$CXX OMPI_FC=$FC \
     COMPILER=$FC ESMF_COMPILER=$FC \
     MPI_ROOT=/usr/local/mpich \
-    PATH=$MPI_ROOT/bin:$PATH \
     ESMF_COMM=mpich2 \
     ESMF_BOPT=O
+
+# fix Perl error message
+ENV LANG C
 
 WORKDIR /root
