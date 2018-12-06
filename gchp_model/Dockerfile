@@ -20,13 +20,6 @@ RUN git clone https://github.com/geoschem/geos-chem.git Code.GCHP \
 
 WORKDIR gchp_standard
 
-# apply dirty fixes for MAPL
-# Should use multiple ENV so CPATH gets updated correctly
-ARG GC_CODE_DIR=/tutorial/Code.GCHP
-ENV CPATH=$GC_CODE_DIR/GCHP/Shared/MAPL_Base:$CPATH
-ENV CPATH=$GC_CODE_DIR/GCHP/Shared/GFDL_fms/shared/include:$CPATH
-ENV CPATH=$GC_CODE_DIR/GCHP/gchp_standard/CodeDir/GCHP/ESMF/Linux/include:$CPATH
-
 # compile source code
 RUN touch gchp.env && make compile_clean
 
