@@ -23,15 +23,12 @@ RUN git clone https://github.com/geoschem/geos-chem.git Code.$GC_VERSION \
 
 # We are back to WORKDIR after each RUN
 RUN git clone https://github.com/geoschem/geos-chem-unittest.git UT \
-    && cd UT && git checkout $UT_VERSION
-
+    && cd UT && git checkout $UT_VERSION \
 # Configure UT
-
 # Each sed command change one line in a text file
 # This could be trivially done by text editors by we want full automation
 # Use '#' as delimiter so the line can contain '/' and ':'
 # Use .* to match the rest of the line
-RUN cd UT \
     && sed -i -e 's#CODE_DIR    :=.*#CODE_DIR    :=/tutorial/Code.$(VERSION)#' runs/shared_inputs/Makefiles/Makefile \
     && cd perl \
     && sed -i -e 's#GCGRID_ROOT    :.*#GCGRID_ROOT    : /#' CopyRunDirs.input \
@@ -41,7 +38,9 @@ RUN cd UT \
 # show the modifications
     && git add -A && git status -v \
 # create run directory
-    && ./gcCopyRunDirs
+    && ./gcCopyRunDirs \
+# remove UT to reduce image size
+    && rm -rf /tutorial/UT
 
 # WORKDIR accepts relative path (relative to current WORKDIR)
 WORKDIR geosfp_4x5_standard
