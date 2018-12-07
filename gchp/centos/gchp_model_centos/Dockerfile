@@ -1,4 +1,4 @@
-FROM zhuangjw/gchp_env
+FROM zhuangjw/gchp_env_centos
 MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
 
 # Git tag or commit
