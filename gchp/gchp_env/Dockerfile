@@ -29,7 +29,7 @@ ENV LD_LIBRARY_PATH=$NETCDF_FORTRAN_HOME/lib:$LD_LIBRARY_PATH
 # GCHP-specific environment
 ENV OMPI_CC=$CC OMPI_CXX=$CXX OMPI_FC=$FC \
     COMPILER=$FC ESMF_COMPILER=$FC \
-    MPI_ROOT=$( dirname $( dirname $( which mpirun ) ) )  \
+    MPI_ROOT=/usr  \
     ESMF_COMM=mpich2 \
     ESMF_BOPT=O
 
