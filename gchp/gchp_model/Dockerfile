@@ -63,7 +63,7 @@ RUN rm -r OutputDir && ln -sf /OutputDir OutputDir \
 # correctly link restart file
     && ln -sf /ExtData/GEOSCHEM_RESTARTS/v2018-11/initial_GEOSChem_rst.c24_standard.nc  initial_GEOSChem_rst.c24_standard.nc \
 # read low-resolution metfields to save space
-    && ln -sf $HOME/ExtData/GEOS_4x5/GEOS_FP MetDir \
+    && ln -sf /ExtData/GEOS_4x5/GEOS_FP MetDir \
     && sed -i -e 1,120s/025x03125.nc/4x5.nc/g ExtData.rc \
 # hard to see why simulation crashes with default debug level 0
     && sed -i -e "s#DEBUG_LEVEL.*#DEBUG_LEVEL: 5#" CAP.rc \
