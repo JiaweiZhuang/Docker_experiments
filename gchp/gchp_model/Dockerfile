@@ -1,4 +1,4 @@
-FROM zhuangjw/gchp_env
+FROM gchp_env
 MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
 
 # Git tag or commit
@@ -15,7 +15,7 @@ WORKDIR /tutorial
 RUN git clone https://github.com/geoschem/geos-chem.git Code.GCHP \
     && cd Code.GCHP && git checkout $GC_VERSION \
     # Temporary fix for https://github.com/geoschem/gchp/issues/5
-    sed -i -e '/@$(MAKE) exe/d' HEMCO/Makefile
+    && sed -i -e '/@$(MAKE) exe/d' HEMCO/Makefile \
     && git clone https://github.com/geoschem/gchp.git GCHP \
     && cd GCHP && git checkout $GCHP_VERSION \
     && cd Run && printf "/ExtData \n 2 \n 1 \n /tutorial \n gchp_standard \n n" | ./createRunDir.sh
@@ -37,8 +37,10 @@ ENV VPATH=$GC_CODE_DIR/GCHP/ESMF/Linux/mod:$VPATH
 
 # --- Fixed for header files ("#include <xxx.h>" statement) ---
 # This prevents the error "cannot find..."
-ENV CPATH=$GC_CODE_DIR/GCHP/Shared/MAPL_Base:$CPATH # MAPL_Generic.h
-ENV CPATH=$GC_CODE_DIR/GCHP/Shared/GFDL_fms/shared/include:$CPATH # fms_platform.h
+# MAPL_Generic.h
+ENV CPATH=$GC_CODE_DIR/GCHP/Shared/MAPL_Base:$CPATH
+# fms_platform.h
+ENV CPATH=$GC_CODE_DIR/GCHP/Shared/GFDL_fms/shared/include:$CPATH
 
 # --- Fixes for module files ("USE xxx" statement) ---
 # zonal.f is looking for mapl_constantsmod.mod in its own directory. Even /usr/include/ is not included
@@ -57,12 +59,12 @@ RUN touch gchp.env && make compile_clean
 #==============================================================================
 
 # Will mount output directory to external volume
-RUN rm OutputDir && ln -sf /OutputDir OutputDir
+RUN rm -r OutputDir && ln -sf /OutputDir OutputDir \
 # correctly link restart file
     && ln -sf /ExtData/GEOSCHEM_RESTARTS/v2018-11/initial_GEOSChem_rst.c24_standard.nc  initial_GEOSChem_rst.c24_standard.nc \
 # read low-resolution metfields to save space
     && ln -sf $HOME/ExtData/GEOS_4x5/GEOS_FP MetDir \
-    && sed -i -e 1,120s/025x03125.nc/4x5.nc/g ExtData.rc
+    && sed -i -e 1,120s/025x03125.nc/4x5.nc/g ExtData.rc \
 # hard to see why simulation crashes with default debug level 0
     && sed -i -e "s#DEBUG_LEVEL.*#DEBUG_LEVEL: 5#" CAP.rc \
 # Turn off CEDS as GCHP 12.1.0 still reads the old, large file.
