@@ -43,7 +43,7 @@ RUN git clone https://github.com/geoschem/geos-chem-unittest.git UT \
     && rm -rf /tutorial/UT
 
 # WORKDIR accepts relative path (relative to current WORKDIR)
-WORKDIR geosfp_4x5_standard
+WORKDIR /tutorial/geosfp_4x5_standard
 
 # compile model
 RUN make -j4 mpbuild NC_DIAG=y BPCH_DIAG=n TIMERS=1

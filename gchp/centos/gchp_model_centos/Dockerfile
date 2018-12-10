@@ -18,7 +18,7 @@ RUN git clone https://github.com/geoschem/geos-chem.git Code.GCHP \
     && cd GCHP && git checkout $GCHP_VERSION \
     && cd Run && printf "/ExtData \n 2 \n 1 \n /tutorial \n gchp_standard \n n" | ./createRunDir.sh
 
-WORKDIR gchp_standard
+WORKDIR /tutorial/gchp_standard
 
 # compile source code
 RUN touch gchp.env && make compile_clean

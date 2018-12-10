@@ -49,7 +49,7 @@ RUN ln -sf $GC_CODE_DIR/GCHP/Shared/MAPL_Base/mapl_constantsmod.mod $GC_CODE_DIR
 #==============================================================================
 # Compile GCHP
 #==============================================================================
-WORKDIR gchp_standard
+WORKDIR /tutorial/gchp_standard
 
 # compile source code
 RUN touch gchp.env && make compile_clean
