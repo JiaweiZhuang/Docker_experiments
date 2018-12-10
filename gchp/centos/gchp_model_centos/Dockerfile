@@ -1,5 +1,5 @@
 FROM zhuangjw/gchp_env_centos
-MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
+LABEL maintainer="Jiawei Zhuang <jiaweizhuang@g.harvard.edu>"
 
 # Git tag or commit
 ARG GC_VERSION=b544322

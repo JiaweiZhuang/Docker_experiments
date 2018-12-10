@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
+LABEL maintainer="Jiawei Zhuang <jiaweizhuang@g.harvard.edu>"
 
 RUN apt-get update && apt-get install -y \
     git vim bc gcc gfortran libnetcdf-dev libnetcdff-dev netcdf-bin \

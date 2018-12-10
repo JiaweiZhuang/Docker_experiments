@@ -1,5 +1,5 @@
-FROM gchp_env
-MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
+FROM zhuangjw/gchp_env
+LABEL maintainer="Jiawei Zhuang <jiaweizhuang@g.harvard.edu>"
 
 # Git tag or commit
 ARG GC_VERSION=b544322

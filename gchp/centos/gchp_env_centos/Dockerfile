@@ -1,5 +1,5 @@
 FROM centos:centos7
-MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
+LABEL maintainer="Jiawei Zhuang <jiaweizhuang@g.harvard.edu>"
 
 # The default compiler is gfortran4 but GCHP requires gfortran7+
 RUN yum -y update \

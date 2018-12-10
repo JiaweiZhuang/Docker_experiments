@@ -1,5 +1,5 @@
 FROM zhuangjw/gc_env
-MAINTAINER Jiawei Zhuang <jiaweizhuang@g.harvard.edu>
+LABEL maintainer="Jiawei Zhuang <jiaweizhuang@g.harvard.edu>"
 
 # ARG is for build-time arguments, not used in run-time (as opposed to ENV)
 ARG GC_VERSION=12.1.0
